@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "562537199010",
+    "firebase_url": "https://makeabl-firebase-notification.firebaseio.com",
+    "project_id": "makeabl-firebase-notification",
+    "storage_bucket": "makeabl-firebase-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562537199010:android:ca1efa6d0ef410d8806efb",
+        "android_client_info": {
+          "package_name": "com.makeabl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562537199010-gahvqr6ke0a5phbg5030ajsdtc1a3eue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-tE-nGvo0JgetBOgIzzjwlatUcRoHTJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562537199010-gahvqr6ke0a5phbg5030ajsdtc1a3eue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

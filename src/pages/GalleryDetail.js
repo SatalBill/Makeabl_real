@@ -283,7 +283,10 @@ class GalleryDetail extends Component {
           })
         }
       })
-      .catch((error) => { console.log('checkActive=>', error); })
+      .catch((error) => {
+        this.setState({ isLoading: false })
+        console.log('checkActive=>', error);
+      })
   }
 
   watermarkShow = () => {

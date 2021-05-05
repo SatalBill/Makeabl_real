@@ -122,7 +122,8 @@ class GalleryDetail extends Component {
       restCount: 0,
       myHeaders: {},
       accessToken: '',
-      singleDisabled: false
+      singleDisabled: false,
+      process_type: ''
     };
     OneSignal.addEventListener('received', this.onReceived);
   }
@@ -266,10 +267,12 @@ class GalleryDetail extends Component {
           let result = res['result'][0]
 
           await this.setState({
-            isActivated: (dayjs(today).format('YYYY-MM-DD HH:mm:ss') > result['from_date'] && dayjs(today).format('YYYY-MM-DD HH:mm:ss') < result['to_date']) ? true : false,
+            // isActivated: (dayjs(today).format('YYYY-MM-DD HH:mm:ss') > result['from_date'] && dayjs(today).format('YYYY-MM-DD HH:mm:ss') < result['to_date']) ? true : false,
+            isActivated: true,
             package_history_id: result['id'],
             restCount: result['image_count'] != "" ? result['image_count'] - result['waste_image_count'] : "unlimited",
             isLoading: false,
+            process_type: res['process_type']
           })
           this.watermarkShow()
         } else if (res['status'] == 210) {
@@ -524,6 +527,7 @@ class GalleryDetail extends Component {
     formdata.append("overlay_id", this.state.overlayID)
     formdata.append("frame_id", this.state.frameID)
     formdata.append("package_history_id", this.state.package_history_id)
+    formdata.append("process_type", this.state.process_type)
 
     var requestOptions = {
       method: 'POST',

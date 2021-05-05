@@ -79,7 +79,8 @@ class GalleryDetail extends Component {
       watermark: '',
       package_history_id: 0,
       resVideoCount: 0,
-      restCount: 0
+      restCount: 0,
+      process_type: ''
     };
     OneSignal.addEventListener('received', this.onReceived);
   }
@@ -150,7 +151,6 @@ class GalleryDetail extends Component {
   activeState = () => {
     var today = new Date().getTime()
     var srch_date = dayjs(today).format('YYYY-MM-DD HH:mm:ss')
-    console.log('srch_date=>', srch_date);
 
     let details = {
       'srch_date': srch_date,
@@ -171,16 +171,18 @@ class GalleryDetail extends Component {
     })
       .then(response => response.json())
       .then(async (res) => {
-        console.log('********************', res);
+        // console.log('********************', res);
         if (res['status'] == 200) {
           let result = res['result'][0]
           // let from_date = new Date(`${result['from_date'].slice(0, 10)}T${result['from_date'].slice(11, 19)}`).getTime()
           // let to_date = new Date(`${result['to_date'].slice(0, 10)}T${result['to_date'].slice(11, 19)}`).getTime()
 
           this.setState({
-            isActivated: (dayjs(today).format('YYYY-MM-DD HH:mm:ss') > result['from_date'] && dayjs(today).format('YYYY-MM-DD hh:mm:ss') < result['to_date']) ? true : false,
+            // isActivated: (dayjs(today).format('YYYY-MM-DD HH:mm:ss') > result['from_date'] && dayjs(today).format('YYYY-MM-DD hh:mm:ss') < result['to_date']) ? true : false,
+            isActivated: true,
             package_history_id: result['id'],
             restCount: result['video_count'] != "Unlimited" ? result['video_count'] - result['waste_video_count'] : "unlimited",
+            process_type: res['process_type']
           })
         } else if (res['status'] == 210) {
           this.setState({
@@ -322,6 +324,7 @@ class GalleryDetail extends Component {
     formdata.append("gallery_id", this.state.gallery_id);
     formdata.append("background_id", this.state.videoInfo.id)
     formdata.append("package_history_id", this.state.package_history_id)
+    formdata.append("process_type", this.state.process_type)
 
     var requestOptions = {
       method: 'POST',

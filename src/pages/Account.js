@@ -71,7 +71,8 @@ class Account extends Component {
       isChecking: false,
       isUploading: false,
       initialPending: 5,
-      pendingModal: false
+      pendingModal: false,
+      server_current_time: ''
     };
     OneSignal.addEventListener('received', this.onReceived);
 
@@ -188,9 +189,10 @@ class Account extends Component {
     })
       .then(response => response.json())
       .then((res) => {
-        // console.log("**************", res);
+        console.log("*******server_current_time*******", res['server_current_time']);
         this.setState({
-          packageHistory: res,
+          packageHistory: res['result'],
+          server_current_time: res['server_current_time'],
           cnt: this.state.cnt + 1
         })
 
@@ -211,7 +213,7 @@ class Account extends Component {
       .then((res) => {
         console.log("****** QR ********", res);
         this.setState({
-          QRHistory: res,
+          QRHistory: res['result'],
         })
 
       })
@@ -846,7 +848,8 @@ class Account extends Component {
             onPress={() => { this._onRefundReady(item, 0) }}
             color={Colors.authButton}
             // disabled={false}
-            disabled={(new Date(`${new Date().getFullYear()}-${new Date().getMonth() < 9 ? '0' : ''}${new Date().getMonth() + 1}-${new Date().getDate() < 10 ? '0' : ''}${new Date().getDate()}T${new Date().getHours() < 10 ? '0' : ''}${new Date().getHours()}:${new Date().getMinutes() < 10 ? '0' : ''}${new Date().getMinutes()}:${new Date().getSeconds() < 10 ? '0' : ''}${new Date().getSeconds()}`).getTime() - new Date(`${item.created_at.slice(0, 10)}T${item.created_at.slice(11, 19)}`).getTime() > 10 * 60 * 60 * 1000) || item.waste_image_count > 0 || item.waste_video_count > 0 ? true : false}
+            // disabled={(new Date(`${new Date().getFullYear()}-${new Date().getMonth() < 9 ? '0' : ''}${new Date().getMonth() + 1}-${new Date().getDate() < 10 ? '0' : ''}${new Date().getDate()}T${new Date().getHours() < 10 ? '0' : ''}${new Date().getHours()}:${new Date().getMinutes() < 10 ? '0' : ''}${new Date().getMinutes()}:${new Date().getSeconds() < 10 ? '0' : ''}${new Date().getSeconds()}`).getTime() - new Date(`${item.created_at.slice(0, 10)}T${item.created_at.slice(11, 19)}`).getTime() > 10 * 60 * 60 * 1000) || item.waste_image_count > 0 || item.waste_video_count > 0 ? true : false}
+            disabled={(new Date(this.state.server_current_time.replace(' ', 'T')).getTime() - new Date(item.created_at.replace(' ', 'T')).getTime() > 1 * 60 * 60 * 1000) || item.waste_image_count > 0 || item.waste_video_count > 0 ? true : false}
           />
         </View>
 

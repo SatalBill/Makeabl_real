@@ -342,16 +342,16 @@ class Account extends Component {
           if (responseJson['status'] == 200) {
             await AsyncStorage.setItem('mobile', phone)
             await AsyncStorage.setItem('address', address)
-            Alert.alert('Success', 'Your account has been updated.')
+            Alert.alert('Success!', 'Your account has been updated.')
           } else if (responseJson['status'] == 400) {
-            alert(responseJson.message)
+            Alert.alert('Update failed', responseJson.message)
           }
         })
         .catch((err) => {
           // console.log('err =>', err);
           if (!timeFlag) {
             this.setState({ isLoading: false })
-            alert("Network Error!")
+            Alert.alert('Warning!', "Network Error!")
             clearTimeout(myTimer);
           } else {
             this.setState({ timeFlag: false })

@@ -64,12 +64,12 @@ class QrCodeCamera extends Component {
         if (res.status == 200) {
           this.props.navigation.navigate('PurchasePass')
           setTimeout(() => {
-            alert('Successfully sent!')
+            Alert.alert('Success', 'Pre-paid package is added!','')
           }, 200);
         } else {
           this.props.navigation.goBack()
           setTimeout(() => {
-            alert('QR is invalid!')
+            Alert.alert('Failed', 'QR is invalid!')
           }, 200);
         }
       })

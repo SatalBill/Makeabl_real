@@ -12,6 +12,7 @@ import {
   Dimensions,
   Platform,
   TextInput,
+  Alert
 } from 'react-native';
 import TextComponent from '../components/TextComponent';
 import CustomTextInput from '../components/CustomTextInput';
@@ -110,7 +111,7 @@ export default class Login extends Component {
       timeFlag: true,
       isLoading: false,
     });
-    alert('network error');
+    Alert.alert('Warning', 'Network error');
   };
 
   loginHandle = async () => {
@@ -119,11 +120,11 @@ export default class Login extends Component {
     // console.log(this.state.push_token);
     Keyboard.dismiss();
     if (email == '') {
-      alert('Please enter email');
+      Alert.alert('Warning', 'Please enter email');
     } else if (password == '') {
-      alert('Please enter password');
+      Alert.alert('Warning', 'Please enter password');
     } else if (reg.test(email) === false) {
-      alert('Email syntax error');
+      Alert.alert('Warning', 'Email syntax error');
     } else {
       let details = {
         email: email,
@@ -171,7 +172,7 @@ export default class Login extends Component {
               await AsyncStorage.setItem('address', responseJson['address'] == '' || responseJson['address'] == null ? 'No address' : JSON.stringify(responseJson['address']));
               this.props.navigation.navigate('App');
             } else if (responseJson['status'] == 204) {
-              setTimeout(() => { alert('Wrong email or password') }, 100);
+              setTimeout(() => { Alert.alert('Warning', 'Wrong email or password') }, 100);
             } else if (responseJson['status'] == 205) {
               Toast.showWithGravity('No activated. Please verify your email.', Toast.LONG, Toast.TOP);
               await AsyncStorage.setItem('userID', JSON.stringify(responseJson['id']));
@@ -183,7 +184,7 @@ export default class Login extends Component {
               await AsyncStorage.setItem('userToken', JSON.stringify(responseJson['token']));
               this.props.navigation.navigate('Register');
             } else if (responseJson['status'] == 207) {
-              setTimeout(() => { alert('Your refund request is under pending status.') }, 100);
+              setTimeout(() => { Alert.alert('Warning', 'Your refund request is under pending status.') }, 100);
             }
           }
         })
@@ -191,7 +192,7 @@ export default class Login extends Component {
           // console.log('Login Error=>', err);
           if (!timeFlag) {
             this.setState({ isLoading: false });
-            alert('Network Error!');
+            Alert.alert('Warning', 'Network Error!');
             clearTimeout(myTimer);
           } else {
             this.setState({ timeFlag: false });
@@ -272,7 +273,7 @@ export default class Login extends Component {
             this.props.navigation.navigate('Verify');
           } else if (responseJson['status'] == 207) {
             setTimeout(() => {
-              alert('Email exists already');
+              Alert.alert('Warning', 'Email exists already');
             }, 100);
           }
         })
@@ -281,7 +282,7 @@ export default class Login extends Component {
           clearTimeout(myTimer);
           if (!timeFlag) {
             this.setState({ isLoading: false });
-            alert('Network Error!!');
+            Alert.alert('Warning', 'Network Error!!');
           } else {
             this.setState({ timeFlag: false });
           }

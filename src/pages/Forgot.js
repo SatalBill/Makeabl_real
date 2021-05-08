@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StatusBar, SafeAreaView, StyleSheet, Image, TouchableOpacity, Keyboard, Dimensions } from 'react-native';
+import { Text, View, ScrollView, StatusBar, SafeAreaView, StyleSheet, Image, TouchableOpacity, Keyboard, Dimensions, Alert } from 'react-native';
 import TextComponent from '../components/TextComponent'
 import CustomTextInput from '../components/CustomTextInput'
 import AuthButton from '../components/AuthButton'
@@ -38,16 +38,16 @@ export default class Forgot extends Component {
       timeFlag: true,
       isLoading: false
     })
-    alert('network error')
+    Alert.alert('Warning', 'network error')
   }
   _onSend = () => {
     // console.log('Email sent');
     const { email, timeFlag } = this.state
     Keyboard.dismiss()
     if (email == "") {
-      alert('Please enter email')
+      Alert.alert('Warning', 'Please enter email')
     } else if (reg.test(email) === false) {
-      alert('Email syntax error')
+      Alert.alert('Warning', 'Email syntax error')
     } else {
       var myTimer = setTimeout(function () { this.NetworkSensor() }.bind(this), 8000)
       this.setState({ isLoading: true })
@@ -79,7 +79,7 @@ export default class Forgot extends Component {
           // console.log('JSON.stringify(err)=>', err);
           if (!timeFlag) {
             this.setState({ isLoading: false })
-            alert("Network Error!")
+            Alert.alert('Warning', "Network Error!")
             clearTimeout(myTimer);
           } else {
             this.setState({ timeFlag: false, isLoading: false })
@@ -92,11 +92,11 @@ export default class Forgot extends Component {
     const { password, confirmPassword, id, timeFlag } = this.state
     Keyboard.dismiss()
     if (password == "") {
-      alert('Please enter password')
+      Alert.alert('Warning', 'Please enter password')
     } else if (confirmPassword == "") {
-      alert('Please enter confirm password')
+      Alert.alert('Warning', 'Please enter confirm password')
     } else if (password != confirmPassword) {
-      alert("Confirm password doesn't match password")
+      Alert.alert('Warning', "Confirm password doesn't match password")
     } else {
       let details = {
         'id': id,
@@ -125,10 +125,10 @@ export default class Forgot extends Component {
           clearTimeout(myTimer)
           // console.log('status =>', responseJson['status']);
           if (responseJson['status'] == 200) {
-            alert(responseJson['message'])
+            Alert.alert('Warning', responseJson['message'])
             this.props.navigation.navigate('Login')
           } else {
-            alert('Reset password failed')
+            Alert.alert('Warning', 'Reset password failed')
           }
         })
         .catch((err) => {
@@ -136,7 +136,7 @@ export default class Forgot extends Component {
           if (!timeFlag) {
             if (err.message == "Request failed with status code 401") {
               this.setState({ isLoading: false })
-              alert("Network Error!")
+              Alert.alert('Warning', "Network Error!")
             }
             clearTimeout(myTimer);
           } else {

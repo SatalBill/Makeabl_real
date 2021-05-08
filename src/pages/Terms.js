@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, StatusBar, Dimensions } from 'react-native';
+import { View, ScrollView, StyleSheet, StatusBar, Dimensions, Alert } from 'react-native';
 import TextComponent from '../components/TextComponent';
 import Colors from '../constants/Colors'
 import AuthButton from '../components/AuthButton'
@@ -25,7 +25,7 @@ export default class Terms extends Component {
     await this.setState({
       isLoading: false
     })
-    alert('network error')
+    Alert.alert('Warning', 'Network error')
   }
 
   _getTerms = () => {

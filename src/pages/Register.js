@@ -90,14 +90,14 @@ export default class Register extends Component {
       timeFlag: true,
       isLoading: false
     })
-    alert('network error')
+    Alert.alert('Warning', 'Network error')
   }
 
   _upload = async () => {
     console.log('upload');
     const { email, password, timeFlag } = this.state
     if (this.state.filePath == "") {
-      alert('Please take your face photo')
+      Alert.alert('Warning', 'Please take your face photo')
     } else {
       this.setState({ isLoading: true })
       // var myTimer = setTimeout(function () { this.NetworkSensor() }.bind(this), 58000)
@@ -120,7 +120,7 @@ export default class Register extends Component {
             await AsyncStorage.setItem('photoURL', JSON.stringify(result['face_url']))
             this.props.navigation.navigate('App')
           } else {
-            alert(result['result'])
+            Alert.alert('Warning', result['result'])
             setTimeout(() => {
               this._pickImageFront(2)
             }, 500);
@@ -128,7 +128,7 @@ export default class Register extends Component {
         })
         .catch((err) => {
           // console.log('catchError=>', err);
-          alert("Network Error!")
+          Alert.alert('Warning', "Network Error!")
           if (!this.state.timeFlag) {
             this.setState({ isLoading: false })
             // clearTimeout(myTimer);

@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   FlatList,
-  Image,
+  Alert,
 } from 'react-native';
 import TextComponent from '../components/TextComponent';
 import Colors from '../constants/Colors';
@@ -178,7 +178,7 @@ class MerchandiseDetail extends Component {
             isLoading: false,
           });
         } else {
-          alert(responseJSON);
+          Alert.alert('Warning', responseJSON);
           // console.log(responseJSON);
         }
       })
@@ -300,7 +300,7 @@ class MerchandiseDetail extends Component {
                   //   'siteName': this.state.itemDetail.site
                   // })
                 } else {
-                  alert('Please checkout the items in the cart page.');
+                  Alert.alert('Warning', 'Please checkout the items in the cart page.');
                   // console.log(responseJSON);
                 }
               })
@@ -310,7 +310,7 @@ class MerchandiseDetail extends Component {
               });
           } else {
             this.setState({ isAdding: false });
-            alert('Please checkout the items in the cart page first.');
+            Alert.alert('Warning', 'Please checkout the items in the cart page first.');
           }
         })
         .catch((err) => {

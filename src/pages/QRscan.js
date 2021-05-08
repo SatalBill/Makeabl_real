@@ -78,7 +78,7 @@ class QrCodeCamera extends Component {
         this.props.navigation.goBack()
         console.log('>>>',err);
         setTimeout(() => {
-          alert('Network error')
+          Alert.alert('Warning', 'Network error')
         }, 200);
       })
   }
@@ -97,7 +97,7 @@ class QrCodeCamera extends Component {
     }).start()
     setTimeout(() => {
       Alert.alert(
-        `Successfylly scanned!`,
+        `Successfully scanned!`,
         `Are you sure want to send this data?`,
         [
           { text: 'CANCEL', style: 'cancel', onPress: () => this.props.navigation.goBack() },

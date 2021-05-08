@@ -313,7 +313,7 @@ class GalleryDetail extends Component {
         ]
       )
     } else {
-      alert('Please purchase digital pass for this venue or purchase single video.')
+      Alert.alert('Warning', 'Please purchase digital pass for this venue or purchase single video.')
     }
   }
 
@@ -554,13 +554,13 @@ class GalleryDetail extends Component {
           })
           .catch((err) => {
             console.log('------error2222------', { ...err });
-            alert('Something went wrong.')
+            Alert.alert('Warning', 'Something went wrong.')
             this.setState({ isChecking: false })
           });
       })
       .catch((err) => {
         console.log('------error111------', err);
-        alert('Something went wrong.')
+        Alert.alert('Warning', 'Something went wrong.')
         this.setState({ isChecking: false })
       });
   };
@@ -587,7 +587,7 @@ class GalleryDetail extends Component {
         .then((response) => {
           console.log('response', response);
           this.setState({ isPaid: true, package_history_id: 0 })
-          alert('You can now proceed to process the content')
+          Alert.alert('Notice', 'You can now proceed to process the content')
         })
         .catch(err => {
           console.log('=======Start========')

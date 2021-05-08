@@ -200,7 +200,7 @@ import React, { Component } from 'react'
 import {
   View,
   ActivityIndicator,
-  Text
+  Alert
 } from 'react-native'
 import { WebView } from 'react-native-webview'
 import axios from 'axios'
@@ -282,7 +282,7 @@ export default class Paypal extends Component {
               approvalUrl: approvalUrl.href
             })
           }).catch(err => {
-            alert(err)
+            Alert.alert('Warning', err)
             console.log('====err1', err)
           })
       })

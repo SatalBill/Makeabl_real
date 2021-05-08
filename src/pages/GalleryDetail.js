@@ -667,13 +667,13 @@ class GalleryDetail extends Component {
           })
           .catch((err) => {
             // console.log('------error2222------', { ...err });
-            alert('Something went wrong.')
+            Alert.alert('Warning', 'Something went wrong.')
             this.setState({ isLoading: false })
           });
       })
       .catch((err) => {
         // console.log('------error111------', err);
-        alert('Something went wrong.')
+        Alert.alert('Warning', 'Something went wrong.')
         this.setState({ isLoading: false })
       });
   };
@@ -700,7 +700,7 @@ class GalleryDetail extends Component {
         .then((response) => {
           // console.log('response', response);
           this.setState({ isPaid: true, package_history_id: 0 })
-          alert('You can now proceed to process the image')
+          Alert.alert('Notice', 'You can now proceed to process the image')
         })
         .catch(err => {
           // console.log('=======Start========')

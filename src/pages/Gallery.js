@@ -571,7 +571,7 @@ class Gallery extends Component {
       timeFlag: true,
       isLoading: false,
     });
-    alert('network error');
+    Alert.alert('Warning', 'Network error');
   };
 
   _onUpload = async (site_id_upload) => {
@@ -610,16 +610,16 @@ class Gallery extends Component {
           // clearTimeout(myTimer)
           if (result['result'] == 'success') {
             this._onFetchGalleryInfo(0);
-            alert('Successfully uploaded!');
+            Alert.alert('Success', 'Successfully uploaded!');
           } else if (result['result'] != 'success') {
             // alert(result)
-            alert('Photo upload failed');
+            Alert.alert('Warning', 'Photo upload failed');
           }
         })
         .catch((error) => {
           if (!this.state.timeFlag) {
             this.setState({ isUploading: false });
-            alert('Image upload failed')
+            Alert.alert('Warning', 'Image upload failed')
             // console.log(error);
             // clearTimeout(myTimer);
           } else {

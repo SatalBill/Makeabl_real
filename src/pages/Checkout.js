@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, View, ScrollView, StyleSheet, SafeAreaView, StatusBar, Dimensions, TouchableOpacity, TextInput, TouchableHighlight } from 'react-native';
+import { Image, View, ScrollView, StyleSheet, SafeAreaView, StatusBar, Dimensions, TouchableOpacity, Alert } from 'react-native';
 import TextComponent from '../components/TextComponent'
 import CustomTextInput from '../components/CustomTextInput'
 import Colors from '../constants/Colors'
@@ -208,13 +208,13 @@ class Checkout extends Component {
           })
           .catch((err) => {
             // console.log('------error2222------', { ...err });
-            alert('Something went wrong.')
+            Alert.alert('Warning', 'Something went wrong.')
             this.setState({ isChecking: false })
           });
       })
       .catch((err) => {
         // console.log('------error111------', err);
-        alert('Something went wrong.')
+        Alert.alert('Warning', 'Something went wrong.')
         this.setState({ isChecking: false })
       });
   };
@@ -261,7 +261,7 @@ class Checkout extends Component {
       timeFlag: true,
       isLoading: false,
     });
-    // alert('network error');
+    // Alert.alert('Warning', 'network error');
     // console.log('NetworkSensor');
   };
 
@@ -323,14 +323,14 @@ class Checkout extends Component {
           clearTimeout(myTimer);
           if (!timeFlag) {
             this.setState({ isLoading: false });
-            // alert("Network Error!")
+            // Alert.alert('Warning', "Network Error!")
           } else {
             this.setState({ timeFlag: false });
           }
         });
     } catch (error) {
       // console.log({ ...error });
-      alert('Network error. Please try again')
+      Alert.alert('Warning', 'Network error. Please try again')
     }
 
   };

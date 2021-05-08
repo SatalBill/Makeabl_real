@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, StatusBar, Dimensions, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, Alert, TouchableOpacity, Platform } from 'react-native';
 import TextComponent from '../components/TextComponent';
 import Colors from '../constants/Colors'
 import config from '../api/config'
@@ -52,7 +52,7 @@ export default class Permissions extends Component {
       timeFlag: true,
       isLoading: false
     })
-    alert('network error')
+    Alert.alert('Warning', 'Network error')
   }
 
   _resend = async () => {
@@ -127,7 +127,7 @@ export default class Permissions extends Component {
         this.setState({ isLoading: false })
 
         if (res.status == 207) {
-          alert('Wrong verify code')
+          Alert.alert('Warning', 'Wrong verify code')
         } else if (res.status == 200) {
           await AsyncStorage.setItem('userToken', JSON.stringify(res['token']))
           await AsyncStorage.setItem('photoURL', (res['photo_url'] == "" || res['photo_url'] == null) ? "emptyPhoto" : JSON.stringify(res['photo_url']))
@@ -148,7 +148,7 @@ export default class Permissions extends Component {
         this.setState({ isLoading: false })
         if (!this.state.timeFlag) {
           if (error.message == "Request failed with status code 401") {
-            alert("Network Error!")
+            Alert.alert('Warning', "Network Error!")
           }
           clearTimeout(myTimer);
         } else {

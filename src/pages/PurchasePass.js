@@ -208,7 +208,7 @@ class PurchasePass extends Component {
         if (responseJSON['status'] == 200) {
           this._onPay();
         } else {
-          alert('You have already bought package on that day. Please select another date.');
+          Alert.alert('Warning', 'You have already bought package on that day. Please select another date.');
         }
       });
   };
@@ -349,13 +349,13 @@ class PurchasePass extends Component {
           })
           .catch((err) => {
             // console.log('------error2222------', { ...err });
-            alert('Something went wrong.');
+            Alert.alert('Warning', 'Something went wrong.');
             this.setState({ isChecking: false });
           });
       })
       .catch((err) => {
         // console.log('------error111------', err);
-        alert('Something went wrong.');
+        Alert.alert('Warning', 'Something went wrong.');
         this.setState({ isChecking: false });
       });
   };
@@ -365,7 +365,7 @@ class PurchasePass extends Component {
       timeFlag: true,
       isLoading: false,
     });
-    alert('network error');
+    Alert.alert('Warning', 'Network error');
   };
 
   paymentHandler = (id, from, to, validity, txnID, price, email, payStatus) => {
@@ -409,9 +409,7 @@ class PurchasePass extends Component {
           // console.log('responseJson =>', responseJson);
           if (responseJson['status'] == 200) {
             // console.log('=============');
-            alert(
-              `${this.state.buyPrice}${this.state.ISO} was paid successfully!`,
-            );
+            Alert.alert('Warning', `${this.state.buyPrice}${this.state.ISO} was paid successfully!`);
             this.props.navigation.push('Account', {
               Digital: 'digitalHistory',
               from_date: this.state.from_date,
@@ -433,7 +431,7 @@ class PurchasePass extends Component {
         });
     } catch (error) {
       // console.log({ ...error });
-      alert('Network error. Please try again');
+      Alert.alert('Warning', 'Network error. Please try again');
     }
   };
 

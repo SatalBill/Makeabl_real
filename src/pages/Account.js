@@ -296,7 +296,7 @@ class Account extends Component {
       isLoading: false,
       isUploading: false
     })
-    alert('network error')
+    Alert.alert('Warning', 'Network error')
   }
 
   _onSave = async () => {
@@ -342,16 +342,16 @@ class Account extends Component {
           if (responseJson['status'] == 200) {
             await AsyncStorage.setItem('mobile', phone)
             await AsyncStorage.setItem('address', address)
-            Alert.alert('Success!', 'Your account has been updated.')
+            Alert.Alert.alert('Warning', 'Success!', 'Your account has been updated.')
           } else if (responseJson['status'] == 400) {
-            Alert.alert('Update failed', responseJson.message)
+            Alert.Alert.alert('Warning', 'Update failed', responseJson.message)
           }
         })
         .catch((err) => {
           // console.log('err =>', err);
           if (!timeFlag) {
             this.setState({ isLoading: false })
-            Alert.alert('Warning!', "Network Error!")
+            Alert.Alert.alert('Warning', 'Warning!', "Network Error!")
             clearTimeout(myTimer);
           } else {
             this.setState({ timeFlag: false })
@@ -403,7 +403,7 @@ class Account extends Component {
   }
 
   _onRemoveSiteReady = (removeItem) => {
-    Alert.alert(
+    Alert.Alert.alert('Warning', 
       `Are you sure you would like to remove this venue?`,
       `${removeItem.title}`,
       [
@@ -431,10 +431,10 @@ class Account extends Component {
           this.setState({ siteList: responseJson['site_list'] })
           setTimeout(() => {
             this._onFetchSiteList()
-            Alert.alert('Success!', 'Successfully removed')
+            Alert.Alert.alert('Warning', 'Success!', 'Successfully removed')
           }, 100);
         } else {
-          alert(responseJson.message)
+          Alert.alert('Warning', responseJson.message)
         }
       })
       .catch((err) => {
@@ -442,7 +442,7 @@ class Account extends Component {
         this.setState({ isLoading: false })
         clearTimeout(myTimer);
         if (!this.state.timeFlag) {
-          alert("Network Error!")
+          Alert.alert('Warning', "Network Error!")
         } else {
           this.setState({ timeFlag: false })
         }
@@ -485,7 +485,7 @@ class Account extends Component {
               this._onAdd(site_id_validation, 0)
             }
           } else if (responseJSON['status'] == 210) {
-            alert(responseJSON.message)
+            Alert.alert('Warning', responseJSON.message)
           }
         })
         .catch((err) => {
@@ -493,7 +493,7 @@ class Account extends Component {
           this.setState({ isChecking: false })
           clearTimeout(myTimer);
           if (!this.state.timeFlag) {
-            alert("Network Error!")
+            Alert.alert('Warning', "Network Error!")
           } else {
             this.setState({ timeFlag: false })
           }
@@ -530,7 +530,7 @@ class Account extends Component {
   _upload = async () => {
     // console.log('upload');
     if (this.state.filePath == "") {
-      alert('Please take your face photo')
+      Alert.alert('Warning', 'Please take your face photo')
     } else {
       this.setState({ isUploading: true })
       // var myTimer = setTimeout(function () { this.NetworkSensor() }.bind(this), 59000)
@@ -569,12 +569,12 @@ class Account extends Component {
               //     this.setState({ isRegistering: false, faceRegisterModal: false })
               //     clearTimeout(myTimer_face)
               //     if (responseJSON['status'] == 200) {
-              //       Alert.alert('Success', 'Venue has been successfully added')
+              //       Alert.Alert.alert('Warning', 'Success', 'Venue has been successfully added')
               //       this.setState({ siteList: responseJSON['site_list'] })
 
               //     } else if (responseJSON['status'] == 210) {
-              //       alert(responseJSON.message)
-              //     } else alert(responseJSON)
+              //       Alert.alert('Warning', responseJSON.message)
+              //     } else Alert.alert('Warning', responseJSON)
               //   })
               //   .catch((err) => {
               // console.log('err =>', err);
@@ -582,20 +582,20 @@ class Account extends Component {
               //     clearTimeout(myTimer);
               // console.log('site_add_add=>');
               //     if (!this.state.timeFlag) {
-              //       alert("Network Error!")
+              //       Alert.alert('Warning', "Network Error!")
               //     } else {
               //       this.setState({ timeFlag: false })
               //     }
               //   })
 
             } else if (responseJSON["result"] == "no face") {
-              Alert.alert("No face", "Please take your face photo.")
+              Alert.Alert.alert('Warning', "No face", "Please take your face photo.")
             } else if (responseJSON["result"] == "more one face") {
-              Alert.alert("More one face", "There should be only one face in the photo.")
+              Alert.Alert.alert('Warning', "More one face", "There should be only one face in the photo.")
             } else if (responseJSON["result"] == "face is already exist") {
-              Alert.alert("face is already exist", "Please upload another photo.")
+              Alert.Alert.alert('Warning', "face is already exist", "Please upload another photo.")
             } else {
-              alert('Something went wrong.')
+              Alert.alert('Warning', 'Something went wrong.')
               // console.log(responseJSON['result']);
             }
           }
@@ -605,7 +605,7 @@ class Account extends Component {
           this.setState({ isUploading: false })
           // clearTimeout(myTimer);
           if (!this.state.timeFlag) {
-            alert("Network Error!")
+            Alert.alert('Warning', "Network Error!")
           } else {
             this.setState({ timeFlag: false })
           }
@@ -628,7 +628,7 @@ class Account extends Component {
         this.setState({ isLoading: false, siteAddModalVisible: false, faceRegisterModal: false, isUploading: false })
         clearTimeout(myTimer)
         if (responseJSON['status'] == 200) {
-          // Alert.alert('Success', 'Venue has been successfully added')
+          // Alert.Alert.alert('Warning', 'Success', 'Venue has been successfully added')
           this.setState({ siteList: responseJSON['site_list'] })
           setTimeout(() => {
             this._onFetchSiteList()
@@ -643,7 +643,7 @@ class Account extends Component {
           // }
 
         } else {
-          // alert(responseJSON)
+          // Alert.alert('Warning', responseJSON)
           // console.log(responseJSON);
         }
       })
@@ -652,7 +652,7 @@ class Account extends Component {
         this.setState({ isLoading: false })
         clearTimeout(myTimer);
         if (!this.state.timeFlag) {
-          alert("Network Error!")
+          Alert.alert('Warning', "Network Error!")
         } else {
           this.setState({ timeFlag: false })
         }
@@ -665,7 +665,7 @@ class Account extends Component {
   }
 
   showToast = () => {
-    alert('Please click on edit to modify the mobile number')
+    Alert.alert('Warning', 'Please click on edit to modify the mobile number')
     this.setState({ phone: '' })
   }
 
@@ -686,7 +686,7 @@ class Account extends Component {
   }
 
   _onRefundReady = (item, isOrderRefund) => {
-    Alert.alert(
+    Alert.Alert.alert('Warning', 
       'Are you sure want to refund? ',
       'Your account will be in pending state and you will be log out automatically. Pending might takes less than 1 hour. If pending is approved, we will notify you via email.',
       [
@@ -756,7 +756,7 @@ class Account extends Component {
               }
             }, 1000);
           } else {
-            alert('Refund failed.')
+            Alert.alert('Warning', 'Refund failed.')
           }
         })
         .catch(err => {
@@ -799,9 +799,9 @@ class Account extends Component {
           this.setState({ isLoading: false })
           clearTimeout(myTimer)
           if (responseJSON['status'] == 200) {
-            alert('Successfully refunded')
+            Alert.alert('Success', 'Successfully refunded')
           } else {
-            alert('Refund failed.')
+            Alert.alert('Warning', 'Refund failed.')
           }
         })
         .catch(err => {
